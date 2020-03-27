@@ -13,6 +13,7 @@ import com.welisit.utils.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -43,5 +44,24 @@ public class OrderServiceImpl implements OrderService {
         // 清空购物车
         cart.clear();
         return orderId;
+    }
+
+    @Override
+    public List<Order> showAllOrders() {
+        return orderDao.queryAllOrder();
+    }
+
+    @Override
+    public List<OrderItem> showOrderDetail(String orderId) {
+        return orderItemDao.queryItemsById(orderId);
+    }
+
+    @Override
+    public void sendOrder(String orderId) {
+        /**
+         * 状态码1：发货
+         */
+        Integer status = 1;
+        orderDao.updateStatusById(status, orderId);
     }
 }

@@ -2,15 +2,19 @@ package com.welisit.web;
 
 import com.welisit.bean.Cart;
 import com.welisit.bean.Order;
+import com.welisit.bean.OrderItem;
 import com.welisit.bean.User;
 import com.welisit.service.OrderService;
 import com.welisit.service.impl.OrderServiceImpl;
+import com.welisit.utils.WebUtils;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author welisit
@@ -51,7 +55,9 @@ public class OrderServlet extends BaseServlet {
      * @throws IOException
      */
     protected void showAllOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<Order> orderList = orderService.showAllOrders();
+        request.setAttribute("orderList", orderList);
+        request.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(request, response);
     }
 
     /**
@@ -62,7 +68,9 @@ public class OrderServlet extends BaseServlet {
      * @throws IOException
      */
     protected void sendOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String orderId = request.getParameter("orderId");
+        orderService.sendOrder(orderId);
+        response.sendRedirect(request.getHeader("Referer"));
     }
 
     /**
@@ -95,6 +103,9 @@ public class OrderServlet extends BaseServlet {
      * @throws IOException
      */
     protected void showOrderDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 获取订单号
+        String orderId = request.getParameter("orderId");
+        List<OrderItem> itemList = orderService.showOrderDetail(orderId);
 
     }
 

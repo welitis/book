@@ -18,4 +18,17 @@ public interface OrderDAO {
      * @return
      */
     int saveOrder(Order order);
+
+    /**
+     * 查询所有订单
+     * @return
+     */
+    List<Order> queryAllOrder();
+
+    /**
+     * 更新状态
+     * @param status
+     * @param id
+     */
+    void updateStatusById(Integer status, String id);
 }

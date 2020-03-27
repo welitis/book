@@ -7,6 +7,7 @@ import com.welisit.utils.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author welisit
@@ -14,6 +15,23 @@ import java.sql.SQLException;
  * @create 2020-03-27 12:53
  */
 public class OrderItemDAOImpl extends BaseDAO<OrderItem> implements OrderItemDAO {
+    @Override
+    public List<OrderItem> queryItemsById(String orderId) {
+        Connection connection = null;
+        List<OrderItem> itemList = null;
+        try {
+            connection = JdbcUtils.getConnection();
+            String sql = "select `id`, `name`, `price`, `total_money` `totalPrice`, `count`, `order_id` `orderId` from " +
+                    "t_order_item where order_id = ?";
+            itemList = queryForAll(connection, sql, orderId);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        JdbcUtils.close(connection);
+        return itemList;
+    }
+
     @Override
     public int saveOrderItem(OrderItem orderItem) {
         Connection connection = null;

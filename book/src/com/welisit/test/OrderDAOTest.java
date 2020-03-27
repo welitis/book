@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -22,5 +23,18 @@ public class OrderDAOTest {
     public void saveOrder() {
         Order order = new Order("0121212", new Date(System.currentTimeMillis()), new BigDecimal(320), 2);
         orderDAO.saveOrder(order);
+    }
+
+    @Test
+    public void queryAllOrder(){
+        List<Order> orders = orderDAO.queryAllOrder();
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+    }
+
+    @Test
+    public void updateStatusById(){
+        orderDAO.updateStatusById(0, "158529931762381");
     }
 }

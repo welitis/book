@@ -2,6 +2,8 @@ package com.welisit.dao;
 
 import com.welisit.bean.OrderItem;
 
+import java.util.List;
+
 /**
  * @author welisit
  * @Description TODO
@@ -14,4 +16,11 @@ public interface OrderItemDAO {
      * @return
      */
     int saveOrderItem(OrderItem orderItem);
+
+    /**
+     * 查看订单详情
+     * @param orderId
+     * @return
+     */
+    List<OrderItem> queryItemsById(String orderId);
 }
