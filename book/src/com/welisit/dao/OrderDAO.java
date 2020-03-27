@@ -12,5 +12,10 @@ import java.util.List;
  * @create 2020-03-27 0:40
  */
 public interface OrderDAO {
-
+    /**
+     * 保存订单对象进数据库
+     * @param order
+     * @return
+     */
+    int saveOrder(Order order);
 }
