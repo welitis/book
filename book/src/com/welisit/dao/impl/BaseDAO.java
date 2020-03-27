@@ -1,4 +1,4 @@
-package com.welisit.dao;
+package com.welisit.dao.impl;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

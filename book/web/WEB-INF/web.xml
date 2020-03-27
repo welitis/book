@@ -29,6 +29,10 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>com.welisit.web.CartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.welisit.web.OrderServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -37,6 +41,11 @@
     </servlet-mapping>
 
 <!--中国-->
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/orderServlet</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cartServlet</url-pattern>

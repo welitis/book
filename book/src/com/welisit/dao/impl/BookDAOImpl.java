@@ -1,7 +1,6 @@
 package com.welisit.dao.impl;
 
 import com.welisit.bean.Book;
-import com.welisit.dao.BaseDAO;
 import com.welisit.dao.BookDAO;
 import com.welisit.utils.JdbcUtils;
 

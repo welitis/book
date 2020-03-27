@@ -34,7 +34,6 @@ public class UserServlet extends BaseServlet {
         User user = userService.login(userOfParam);
         if (user != null) {
             HttpSession session = req.getSession();
-            System.out.println(session.isNew());
             session.setAttribute("user", user);
             System.out.println(user);
             resp.sendRedirect(req.getContextPath() + "/pages/user/login_success.jsp");

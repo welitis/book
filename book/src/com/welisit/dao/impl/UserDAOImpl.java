@@ -1,7 +1,6 @@
 package com.welisit.dao.impl;
 
 import com.welisit.bean.User;
-import com.welisit.dao.BaseDAO;
 import com.welisit.dao.UserDAO;
 import com.welisit.utils.JdbcUtils;
 
