@@ -38,7 +38,10 @@ public class OrderServiceImpl implements OrderService {
         // 保存商品项
         for (CartItem item : cart.getItems().values()) {
             OrderItem orderItem = new OrderItem(item.getId(), item.getName(), item.getCount(), item.getPrice(), item.getTotalPrice(), orderId);
+            System.out.println(item.getId());
             orderItemDao.saveOrderItem(orderItem);
+
+            // 更新库存销量
         }
 
         // 清空购物车
@@ -54,6 +57,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderItem> showOrderDetail(String orderId) {
         return orderItemDao.queryItemsById(orderId);
+    }
+
+    @Override
+    public List<Order> showMyOrders(Integer id) {
+
+        return orderDao.queryOrdersByUserId(id);
+    }
+
+    @Override
+    public void receiveOrder(String orderId) {
+        orderDao.updateStatusById(2, orderId);
+    }
+
+    @Override
+    public Order getOrderById(String orderId) {
+        return orderDao.queryOneById(orderId);
     }
 
     @Override

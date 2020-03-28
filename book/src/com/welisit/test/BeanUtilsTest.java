@@ -32,5 +32,12 @@ public class BeanUtilsTest {
         System.out.println(user);
     }
 
+    @Test
+    public void test3() throws InvocationTargetException, IllegalAccessException {
+        User user = new User();
+        BeanUtils.setProperty(user, "id", 1);
+        System.out.println(user);
+    }
+
 
 }

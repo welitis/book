@@ -28,17 +28,19 @@ public class UserServlet extends BaseServlet {
     }
 
     protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
-
         User userOfParam = WebUtils.copyParamsToBean(req.getParameterMap(), new User());
         User user = userService.login(userOfParam);
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            System.out.println(user);
-            resp.sendRedirect(req.getContextPath() + "/pages/user/login_success.jsp");
+            String lastUrl = req.getParameter("lastUrl");
+            if (lastUrl == null || "".equals(lastUrl)) {
+                resp.sendRedirect(req.getContextPath() + "/pages/user/login_success.jsp");
+            } else {
+                resp.sendRedirect(lastUrl);
+            }
         } else {
-            System.out.println("用户名或密码错误");
+            System.out.println("用户名["+ userOfParam.getUsername() +"]或密码错误");
             req.setAttribute("msg", "用户名或密码错误");
             req.setAttribute("parameterMap", req.getParameterMap());
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
@@ -46,6 +48,7 @@ public class UserServlet extends BaseServlet {
     }
 
     protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
         String username = req.getParameter("username");
         String code = req.getParameter("code");

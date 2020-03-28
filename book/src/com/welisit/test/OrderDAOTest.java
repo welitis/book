@@ -37,4 +37,18 @@ public class OrderDAOTest {
     public void updateStatusById(){
         orderDAO.updateStatusById(0, "158529931762381");
     }
+
+    @Test
+    public void queryOneById(){
+        Order order = orderDAO.queryOneById("158531484458601");
+        System.out.println(order);
+    }
+
+    @Test
+    public void queryOrdersByUserId(){
+        List<Order> orders = orderDAO.queryOrdersByUserId(1);
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+    }
 }

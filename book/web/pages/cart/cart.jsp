@@ -10,7 +10,7 @@
 <body>
 	
 	<div id="header">
-			<img class="logo_img" alt="" src="static/img/logo.gif" >
+		<a href="index.jsp"><img class="logo_img" alt="" src="static/img/logo.gif" ></a>
 			<span class="wel_word">购物车</span>
 		<%@include file="/pages/common/user_info.jsp"%>
 	</div>

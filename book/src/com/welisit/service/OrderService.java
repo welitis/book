@@ -38,4 +38,24 @@ public interface OrderService {
      * @return
      */
     List<OrderItem> showOrderDetail(String orderId);
+
+    /**
+     * 通过订单id获取订单对象
+     * @param orderId
+     * @return
+     */
+    Order getOrderById(String orderId);
+
+    /**
+     * 查看我的订单
+     * @param id
+     * @return
+     */
+    List<Order> showMyOrders(Integer id);
+
+    /**
+     * 确认收货
+     * @param orderId
+     */
+    void receiveOrder(String orderId);
 }

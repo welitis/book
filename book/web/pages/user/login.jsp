@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,11 @@
                 </div>
                 <div class="form">
                     <form action="userServlet" method="post">
+<%--                        跳转页面--%>
+                        <c:if test="${not empty param.lastUrl}">
+                            <input type="hidden" name="lastUrl" value="${param.lastUrl}">
+                        </c:if>
+
                         <input type="hidden" name="action" value="login">
                         <label>用户名称：</label>
                         <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1"

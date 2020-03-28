@@ -15,6 +15,38 @@ import java.util.List;
  */
 public class OrderDAOImpl extends BaseDAO<Order> implements OrderDAO {
     @Override
+    public List<Order> queryOrdersByUserId(Integer id) {
+        Connection connection = null;
+        List<Order> orderList = null;
+        try {
+            connection = JdbcUtils.getConnection();
+            String sql = "select `order_id` `orderId`, `create_time` `createTime`, `total_money` `price`, `status`, " +
+                    "`user_id` `userId` from t_order where `user_id` = ?";
+            orderList = queryForAll(connection, sql, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        JdbcUtils.close(connection);
+        return orderList;
+    }
+
+    @Override
+    public Order queryOneById(String orderId) {
+        Connection connection = null;
+        Order order = null;
+        try {
+            connection = JdbcUtils.getConnection();
+            String sql = "select `order_id` `orderId`, `create_time` `createTime`, `total_money` `price`, `status`, " +
+                    "`user_id` `userId` from `t_order` where `order_id` = ?";
+            order = queryForOne(connection, sql, orderId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        JdbcUtils.close(connection);
+        return order;
+    }
+
+    @Override
     public int saveOrder(Order order) {
         Connection connection = null;
         try {

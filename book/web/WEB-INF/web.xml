@@ -3,7 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.welisit.filter.ManagerFilter</filter-class>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>zhangsan</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <url-pattern>/manager/*</url-pattern>
+        <url-pattern>/pages/manager/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>com.welisit.web.UserServlet</servlet-class>

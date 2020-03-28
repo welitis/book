@@ -16,6 +16,7 @@ public class BaseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
         String action = req.getParameter("action");
         // 通过反射，根据请求参数中的动作名，调用响应的方法

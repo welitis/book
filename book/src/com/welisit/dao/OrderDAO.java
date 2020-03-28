@@ -31,4 +31,13 @@ public interface OrderDAO {
      * @param id
      */
     void updateStatusById(Integer status, String id);
+
+    /**
+     * 查询订单通过订单号
+     * @param orderId
+     * @return
+     */
+    Order queryOneById(String orderId);
+
+    List<Order> queryOrdersByUserId(Integer id);
 }

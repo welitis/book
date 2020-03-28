@@ -10,6 +10,7 @@ import com.welisit.utils.WebUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +37,7 @@ public class OrderServlet extends BaseServlet {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            response.sendRedirect(request.getContextPath() + "/pages/user/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/pages/user/login.jsp?lastUrl=" + request.getHeader("Referer"));
             return;
         }
         if (cart != null) {
@@ -58,7 +59,7 @@ public class OrderServlet extends BaseServlet {
         List<Order> orderList = orderService.showAllOrders();
         request.setAttribute("orderList", orderList);
         request.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(request, response);
-    }
+}
 
     /**
      * 发货
@@ -81,7 +82,9 @@ public class OrderServlet extends BaseServlet {
      * @throws IOException
      */
     protected void receiveOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String orderId = request.getParameter("orderId");
+        orderService.receiveOrder(orderId);
+        response.sendRedirect(request.getContextPath() + "/orderServlet?action=showMyOrders");
     }
 
     /**
@@ -92,7 +95,14 @@ public class OrderServlet extends BaseServlet {
      * @throws IOException
      */
     protected void showMyOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/pages/user/login.jsp?lastUrl=" + request.getHeader("Referer"));
+            return;
+        }
+        List<Order> orderList = orderService.showMyOrders(user.getId());
+        request.setAttribute("orderList", orderList);
+        request.getRequestDispatcher("/pages/order/order.jsp").forward(request, response);
     }
 
     /**
@@ -106,8 +116,9 @@ public class OrderServlet extends BaseServlet {
         // 获取订单号
         String orderId = request.getParameter("orderId");
         List<OrderItem> itemList = orderService.showOrderDetail(orderId);
-
+        Order order = orderService.getOrderById(orderId);
+        request.setAttribute("itemList", itemList);
+        request.setAttribute("order", order);
+        request.getRequestDispatcher("/pages/order/order_detail.jsp").forward(request, response);
     }
-
-
 }
