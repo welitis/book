@@ -25,8 +25,8 @@ public class OrderDAOImpl extends BaseDAO<Order> implements OrderDAO {
             orderList = queryForAll(connection, sql, id);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
-        JdbcUtils.close(connection);
         return orderList;
     }
 
@@ -41,8 +41,8 @@ public class OrderDAOImpl extends BaseDAO<Order> implements OrderDAO {
             order = queryForOne(connection, sql, orderId);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
-        JdbcUtils.close(connection);
         return order;
     }
 
@@ -55,10 +55,8 @@ public class OrderDAOImpl extends BaseDAO<Order> implements OrderDAO {
             return update(connection, sql, order.getOrderId(), order.getCreateTime(), order.getPrice(), order.getStatus(), order.getUserId());
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
-        JdbcUtils.close(connection);
-        return 0;
-
     }
 
     @Override
@@ -70,8 +68,8 @@ public class OrderDAOImpl extends BaseDAO<Order> implements OrderDAO {
             update(connection, sql, status, id);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
-        JdbcUtils.close(connection);
     }
 
     @Override
@@ -84,8 +82,8 @@ public class OrderDAOImpl extends BaseDAO<Order> implements OrderDAO {
             orderList = queryForAll(connection, sql);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
-        JdbcUtils.close(connection);
         return orderList;
     }
 }

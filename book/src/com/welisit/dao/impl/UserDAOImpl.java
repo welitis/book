@@ -18,8 +18,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
             user = queryForOne(conn, sql, username);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(conn);
+            throw new RuntimeException();
         }
         return user;
     }
@@ -34,8 +33,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
             count = update(connection, sql, user.getUsername(), user.getPassword(), user.getEmail());
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException();
         }
         return count;
     }
@@ -50,8 +48,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
             user = queryForOne(connection, sql, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException();
         }
 
         return user;

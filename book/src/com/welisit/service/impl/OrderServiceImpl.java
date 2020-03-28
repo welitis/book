@@ -1,11 +1,10 @@
 package com.welisit.service.impl;
 
-import com.welisit.bean.Cart;
-import com.welisit.bean.CartItem;
-import com.welisit.bean.Order;
-import com.welisit.bean.OrderItem;
+import com.welisit.bean.*;
+import com.welisit.dao.BookDAO;
 import com.welisit.dao.OrderDAO;
 import com.welisit.dao.OrderItemDAO;
+import com.welisit.dao.impl.BookDAOImpl;
 import com.welisit.dao.impl.OrderDAOImpl;
 import com.welisit.dao.impl.OrderItemDAOImpl;
 import com.welisit.service.OrderService;
@@ -23,6 +22,7 @@ import java.util.Random;
  */
 public class OrderServiceImpl implements OrderService {
 
+    private BookDAO bookDAO = new BookDAOImpl();
     private OrderDAO orderDao = new OrderDAOImpl();
     private OrderItemDAO orderItemDao = new OrderItemDAOImpl();
 
@@ -37,11 +37,14 @@ public class OrderServiceImpl implements OrderService {
 
         // 保存商品项
         for (CartItem item : cart.getItems().values()) {
-            OrderItem orderItem = new OrderItem(item.getId(), item.getName(), item.getCount(), item.getPrice(), item.getTotalPrice(), orderId);
-            System.out.println(item.getId());
+            OrderItem orderItem = new OrderItem(null, item.getName(), item.getCount(), item.getPrice(), item.getTotalPrice(), orderId);
             orderItemDao.saveOrderItem(orderItem);
 
             // 更新库存销量
+            Book book = bookDAO.queryBookById(item.getId());
+            book.setSales(book.getSales() + item.getCount());
+            book.setStock(book.getStock() - item.getCount());
+            bookDAO.updateBook(book);
         }
 
         // 清空购物车

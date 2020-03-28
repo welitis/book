@@ -26,7 +26,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return count;
     }
 
@@ -41,7 +40,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return count;
     }
 
@@ -57,7 +55,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return pageTotalCount;
     }
 
@@ -73,7 +70,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return pageTotalCount;
     }
 
@@ -88,7 +84,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return books;
     }
 
@@ -103,7 +98,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return books;
     }
 
@@ -118,7 +112,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return count;
     }
 
@@ -135,7 +128,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return book;
     }
 
@@ -150,7 +142,6 @@ public class BookDAOImpl extends BaseDAO<Book> implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JdbcUtils.close(connection);
         return bookList;
     }
 }
