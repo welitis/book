@@ -6,10 +6,6 @@
     <filter>
         <filter-name>ManagerFilter</filter-name>
         <filter-class>com.welisit.filter.ManagerFilter</filter-class>
-        <init-param>
-            <param-name>username</param-name>
-            <param-value>zhangsan</param-value>
-        </init-param>
     </filter>
     <filter>
         <filter-name>TranslationFilter</filter-name>

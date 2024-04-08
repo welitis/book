@@ -32,10 +32,4 @@ public class ManagerFilter implements Filter {
         System.out.println("退出过滤器");
     }
 
-    @Override
-    public void init(FilterConfig config) throws ServletException {
-        String username = config.getInitParameter("username");
-        System.out.println("获取FilterConfig中的参数username：" + username);
-    }
-
 }
