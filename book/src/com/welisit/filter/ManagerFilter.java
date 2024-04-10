@@ -18,6 +18,10 @@ public class ManagerFilter implements Filter {
     }
 
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         System.out.println("进入过滤器");
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
